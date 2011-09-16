@@ -1,3 +1,16 @@
+Modified from vgod's vimrc
+
+Difference:
+
+      1. Use my owe color scheme.
+
+      2. No AutoClose plugin which causes arrows doesn't work.
+
+      3. Use `F8` to toggle TagBar.
+
+Useful link for git:
+http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
+
 vgod's vimrc
 ============
 Author: Tsung-Hsiang (Sean) Chang <vgod@vgod.tw>
@@ -58,7 +71,7 @@ All plugins (except vim-latex) were checked out as git submodules,
 which can be upgraded with `git pull`. For example, to upgrade Command-T 
 
      cd ~/.vim/bundle/command-t
-     git pull
+     git pull origin master
 
 To install a new plugin as a git submoudle, type the followin commands.
 
