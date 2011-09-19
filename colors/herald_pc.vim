@@ -24,7 +24,8 @@ if has("gui_running")
 	" -> Text; Miscellaneous
 	hi Normal         guibg=#1F1F1F guifg=#D0D0D0 gui=none
 	hi SpecialKey     guibg=#1F1F1F guifg=#E783E9 gui=none
-	hi VertSplit      guibg=#1F1F1F guifg=#FFEE68 gui=none
+	"hi VertSplit      guibg=#1F1F1F guifg=#FFEE68 gui=none
+	hi VertSplit      guibg=#25365a guifg=#696567 gui=none
 	hi SignColumn     guibg=#1F1F1F guifg=#BF81FA gui=none
 	hi NonText        guibg=#1F1F1F guifg=#FC6984 gui=none
 	hi Directory      guibg=#1F1F1F guifg=#FFEE68 gui=none 
@@ -34,7 +35,8 @@ if has("gui_running")
 	hi Cursor         guibg=#FFEE68 guifg=#1F1F1F gui=none
 	hi CursorIM       guibg=#FFEE68 guifg=#1F1F1F gui=none
 	hi CursorColumn   guibg=#000000               gui=none
-	hi CursorLine     guibg=#000000               gui=none
+	"hi CursorLine     guibg=#000000               gui=none
+	hi CursorLine     guibg=#404040               gui=none
 
 	" -> Folding
 	hi FoldColumn     guibg=#001336 guifg=#003DAD gui=none
@@ -42,8 +44,14 @@ if has("gui_running")
 
 	" -> Line info  
 	hi LineNr         guibg=#000000 guifg=#696567 gui=none
-	hi StatusLine     guibg=#000000 guifg=#696567 gui=none
-	hi StatusLineNC   guibg=#25365a guifg=#696567 gui=none
+	"hi StatusLine     guibg=#000000 guifg=#696567 gui=none
+	"hi StatusLineNC   guibg=#25365a guifg=#696567 gui=none
+	"hi StatusLine     guibg=#000000 guifg=#d0d0a0   gui=none
+        "hi StatusLineNC   guibg=#25365a guifg=#d0d0a0   gui=none
+	"hi StatusLine     guibg=#000000 guifg=#009090   gui=none
+	"hi StatusLineNC   guibg=#25365a guifg=#009090   gui=none
+	hi StatusLine     guibg=#000000 guifg=#c2bfa5   gui=none
+	hi StatusLineNC   guibg=#25365a guifg=#c2bfa5   gui=none
 
 	" -> Messages
 	hi ErrorMsg       guibg=#A32024 guifg=#D0D0D0 gui=none
@@ -75,11 +83,14 @@ if has("gui_running")
 	hi TabLineSel     guibg=#1F1F1F guifg=#D0D0D0 gui=bold  
 	"
 	" -> Visual Mode
-	hi Visual         guibg=#000000 guifg=#FFB539 gui=none
-	hi VisualNOS      guibg=#000000 guifg=#696567 gui=none
+	"hi Visual         guibg=#000000 guifg=#FFB539 gui=none
+	"hi VisualNOS      guibg=#000000 guifg=#696567 gui=none
+	hi Visual          guibg=#304050               gui=none
+	hi VisualNOS                     guifg=fg      gui=none
 
 	" -> Code
-	hi Comment        guibg=#1F1F1F guifg=#696567 gui=none
+	"hi Comment        guibg=#1F1F1F guifg=#696567 gui=none
+        hi Comment guibg=bg guifg=#7ec0ee gui=none
 	hi Constant       guibg=#1F1F1F guifg=#6DF584 gui=none
 	hi String         guibg=#1F1F1F guifg=#FFB539 gui=none
 	hi Error          guibg=#1F1F1F guifg=#FC4234 gui=none
