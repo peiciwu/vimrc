@@ -18,6 +18,7 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 set nu
+set tw=80               " set line width
 
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
@@ -33,7 +34,7 @@ set t_Co=256         " 256 color mode
 colors herald_pc
 
 if has("gui_running")   " GUI color and font settings
-	set guifont=Monaco:16 " Mac own font
+	set guifont=Monaco:h14 " Mac own font
 	set cursorline  " highlight current line
 endif
 
