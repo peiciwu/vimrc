@@ -90,11 +90,13 @@ if has("gui_running")
 
 	" -> Code
 	"hi Comment        guibg=#1F1F1F guifg=#696567 gui=none
-        hi Comment guibg=bg guifg=#7ec0ee gui=none
+        hi Comment        guibg=bg guifg=#7ec0ee gui=none
+	"hi Comment        guibg=#1F1F1F guifg=#7ee0ce gui=none
 	hi Constant       guibg=#1F1F1F guifg=#6DF584 gui=none
 	hi String         guibg=#1F1F1F guifg=#FFB539 gui=none
 	hi Error          guibg=#1F1F1F guifg=#FC4234 gui=none
-	hi Identifier     guibg=#1F1F1F guifg=#70BDF1 gui=none
+	"hi Identifier     guibg=#1F1F1F guifg=#70BDF1 gui=none
+	hi Identifier     guibg=#1F1F1F guifg=#7ee0ce gui=none
 	hi Function       guibg=#1F1F1F guifg=#90CBF1 gui=none
 	hi Ignore         guibg=#1F1F1F guifg=#1F1F1F gui=none
 	hi MatchParen     guibg=#FFA500 guifg=#1F1F1F gui=none
