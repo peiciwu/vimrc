@@ -229,8 +229,8 @@ endif
 :inoremap } <c-r>=ClosePair('}')<CR>
 :inoremap [ []<ESC>i
 :inoremap ] <c-r>=ClosePair(']')<CR>
-:inoremap < <><ESC>i
-:inoremap > <c-r>=ClosePair('>')<CR>
+":inoremap < <><ESC>i
+":inoremap > <c-r>=ClosePair('>')<CR>
 function ClosePair(char)
 if getline('.')[col('.') - 1] == a:char
 return "\<Right>"
@@ -304,3 +304,5 @@ hi link EasyMotionShade  Comment
 nnoremap <silent> <F8> :TagbarToggle<CR> 
 " set focus to TagBar when opening it
 let g:tagbar_autofocus = 1
+"let g:tagbar_ctags_bin = '/usr/bin/ctags' "Proper ctags locations
+"let g:tagbar_width = 26                   "Default is 40, seems too wide
