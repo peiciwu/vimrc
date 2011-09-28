@@ -8,7 +8,12 @@ Difference:
 
       3. Use `F8` to toggle TagBar.
 
-Useful link for git:
+Installation:
+      Follow the following manual but change the url to git://github.com/peiciwu/vimrc.git
+
+Useful link for github and git:
+http://evgeny-goldin.com/wiki/Git
+http://blog.longwin.com.tw/2009/05/git-learn-initial-command-2009/
 http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
 
 vgod's vimrc
