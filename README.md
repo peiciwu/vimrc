@@ -8,12 +8,20 @@ Difference:
 
       3. Use `F8` to toggle TagBar.
 
+      4. Use `F11' or `F12` to execute ctags to create tag file for
+         OmniCppComplete. The ctag options can also be put in .ctag configure
+         file. See OmniCppComplete document for reference. 
+
 Installation:
       Follow the following manual but change the url to git://github.com/peiciwu/vimrc.git
 
-Useful link for github and git:
+Useful links:
+http://blog.vgod.tw/2011/03/19/vimrc/
+
 http://evgeny-goldin.com/wiki/Git
+
 http://blog.longwin.com.tw/2009/05/git-learn-initial-command-2009/
+
 http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/
 
 vgod's vimrc

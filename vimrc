@@ -225,6 +225,14 @@ if has("autocmd") && exists("+omnifunc")
               \	endif
 endif
 
+" Close automatically the preview window after a moni completion
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" build Ctags database
+map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ../.<CR>
+
 "auto add right parenthesis
 :inoremap ( ()<ESC>i
 :inoremap ) <c-r>=ClosePair(')')<CR>

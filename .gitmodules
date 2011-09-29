@@ -4,9 +4,6 @@
 [submodule "bundle/smart-parentheses"]
 	path = bundle/smart-parentheses
 	url = git://github.com/vim-scripts/Smart-Parentheses.git
-[submodule "bundle/autoclose"]
-	path = bundle/autoclose
-	url = git://github.com/Townk/vim-autoclose.git
 [submodule "bundle/command-t"]
 	path = bundle/command-t
 	url = git://github.com/wincent/Command-T.git
