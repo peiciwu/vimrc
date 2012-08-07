@@ -63,8 +63,8 @@ set tm=500
 
 " TAB setting{
    set expandtab        "replace <TAB> with spaces
-   set softtabstop=3 
-   set shiftwidth=3 
+   set softtabstop=2
+   set shiftwidth=2
 
    au FileType Makefile set noexpandtab
 "}      							
@@ -234,12 +234,12 @@ map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ../.<CR>
 
 "auto add right parenthesis
-:inoremap ( ()<ESC>i
-:inoremap ) <c-r>=ClosePair(')')<CR>
+":inoremap ( ()<ESC>i
+":inoremap ) <c-r>=ClosePair(')')<CR>
 :inoremap { {}<ESC>i
 :inoremap } <c-r>=ClosePair('}')<CR>
-:inoremap [ []<ESC>i
-:inoremap ] <c-r>=ClosePair(']')<CR>
+":inoremap [ []<ESC>i
+":inoremap ] <c-r>=ClosePair(']')<CR>
 ":inoremap < <><ESC>i
 ":inoremap > <c-r>=ClosePair('>')<CR>
 function ClosePair(char)
