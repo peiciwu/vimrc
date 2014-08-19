@@ -145,6 +145,8 @@ elseif &t_Co == 256
 	hi LineNr         ctermbg=0    ctermfg=241   cterm=none
 	hi StatusLine     ctermbg=0    ctermfg=144   cterm=none
 	hi StatusLineNC   ctermbg=237  ctermfg=144   cterm=none
+	"hi StatusLineNC     ctermbg=0    ctermfg=144   cterm=none
+	"hi StatusLine   ctermbg=237  ctermfg=144   cterm=none
 
 	" -> Messages
 	hi ErrorMsg       ctermbg=124  ctermfg=252   cterm=none
@@ -171,9 +173,13 @@ elseif &t_Co == 256
 	hi PmenuSel       ctermbg=208  ctermfg=52    cterm=none
 
 	" -> Tabs
-	hi TabLine        ctermbg=233  ctermfg=234   cterm=none
-	hi TabLineFill    ctermbg=0                  cterm=none
-	hi TabLineSel     ctermbg=234  ctermfg=252   cterm=bold 
+	"hi TabLine        ctermbg=233  ctermfg=234   cterm=none
+	"hi TabLine        ctermbg=233  ctermfg=215   cterm=none
+	hi TabLine        ctermbg=237  ctermfg=144   cterm=none
+	hi TabLineFill    ctermbg=237                  cterm=none
+	"hi TabLineSel     ctermbg=234  ctermfg=252   cterm=bold 
+	"hi TabLineSel     ctermbg=208  ctermfg=234   cterm=bold 
+	hi TabLineSel   ctermbg=24  ctermfg=144   cterm=none
 	"
 	" -> Visual Mode
 	hi Visual         ctermbg=24   ctermfg=none   cterm=none 
@@ -187,7 +193,8 @@ elseif &t_Co == 256
 	hi Identifier     ctermbg=234  ctermfg=75    cterm=none
 	hi Function       ctermbg=234  ctermfg=117   cterm=none
 	hi Ignore         ctermbg=234  ctermfg=234   cterm=none
-	hi MatchParen     ctermbg=214  ctermfg=234   cterm=none
+	"hi MatchParen     ctermbg=214  ctermfg=234   cterm=none
+	hi MatchParen     ctermbg=234 ctermfg=214  cterm=none
 	hi PreProc        ctermbg=234  ctermfg=141   cterm=none
 	hi Special        ctermbg=234  ctermfg=227   cterm=none
 	hi Todo           ctermbg=234  ctermfg=203   cterm=bold

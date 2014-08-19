@@ -52,3 +52,21 @@
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = git://github.com/majutsushi/tagbar
+[submodule "boundle/unite"]
+	path = boundle/unite
+	url = https://github.com/Shougo/unite.vim
+[submodule "bundle/unite"]
+	path = bundle/unite
+	url = https://github.com/Shougo/unite.vim
+[submodule "bundle/vimproc"]
+	path = bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim
+[submodule "bundle/unite-outline"]
+	path = bundle/unite-outline
+	url = https://github.com/Shougo/unite-outline
+[submodule "bundle/neomru"]
+	path = bundle/neomru
+	url = https://github.com/Shougo/neomru.vim
+[submodule "bundle/unite-tag"]
+	path = bundle/unite-tag
+	url = https://github.com/tsukkee/unite-tag

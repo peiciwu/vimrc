@@ -14,11 +14,16 @@ call pathogen#helptags()
 
 set nocompatible	" not compatible with the old-fashion vi mode
 set bs=2		" allow backspacing over everything in insert mode
-set history=50		" keep 50 lines of command line history
+set history=1000    	" keep 1000 lines of command line history
 set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
-set nu
+" set nu                " show line number
 set tw=80               " set line width
+
+" This makes vim act like all other editors, buffers can
+" exist in the background without being in a window.
+" http://items.sjbach.com/319/configuring-vim-right
+set hidden 
 
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
@@ -34,7 +39,7 @@ set t_Co=256         " 256 color mode
 colors herald_pc
 
 if has("gui_running")   " GUI color and font settings
-	set guifont=Monaco:h14 " Mac own font
+	"set guifont=Monaco:h14 " Mac own font
 	set cursorline  " highlight current line
 endif
 
@@ -54,6 +59,9 @@ set copyindent		" copy the previous indentation on autoindenting
 set ignorecase		" ignore case when searching
 set smartcase		" ignore case if search pattern is all lowercase,case-sensitive otherwise
 set smarttab		" insert tabs on the start of a line according to context
+
+set nowrap              " don't wrap lines
+set linebreak           " wrap lines at convenient points
 
 " disable sound on errors
 set noerrorbells
@@ -120,7 +128,7 @@ let g:mapleader=","
 map <leader>r :call Replace()<CR>
 
 " open the error console
-map <leader>cc :botright cope<CR> 
+map <leader>ec :botright cope<CR> 
 " move to next error
 map <leader>] :cn<CR>
 " move to the prev error
@@ -128,9 +136,9 @@ map <leader>[ :cp<CR>
 
 " --- move around splits {
 " move to and maximize the below split 
-map <C-J> <C-W>j<C-W>_
+"map <C-J> <C-W>j<C-W>_
 " move to and maximize the above split 
-map <C-K> <C-W>k<C-W>_
+"map <C-K> <C-W>k<C-W>_
 " move to and maximize the left split 
 nmap <c-h> <c-w>h<c-w><bar>
 " move to and maximize the right split  
@@ -192,11 +200,17 @@ cmap cd. lcd %:p:h
 " PROGRAMMING SHORTCUTS
 "--------------------------------------------------------------------------- 
 
+" --- ctags setting
 " Ctrl-[ jump out of the tag stack (undo Ctrl-])
 " map <C-[> <ESC>:po<CR>
-
-" ctags setting
 map  g
+" use ,S to jump to tag in a horizontal split
+nnoremap <silent> ,S <C-W><C-]> 
+" use ,V to jump to tag in a vertical split
+nnoremap <silent> ,V  :let word=expand("<cword>")<CR>:vsp<CR>:wincmd w<cr>:exec("tag ". word)<cr>
+" use ,T to jump to tag in a new tab
+nnoremap <silent> ,T :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+
 
 " ,g generates the header guard
 map <leader>g :call IncludeGuard()<CR>
@@ -209,21 +223,21 @@ fun! IncludeGuard()
 endfun
 
 " Enable omni completion. (Ctrl-X Ctrl-O)
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd FileType java set omnifunc=javacomplete#Complete
+"autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType c set omnifunc=ccomplete#Complete
+"autocmd FileType java set omnifunc=javacomplete#Complete
 
 " use syntax complete if nothing else available
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-              \	if &omnifunc == "" |
-              \		setlocal omnifunc=syntaxcomplete#Complete |
-              \	endif
-endif
+"if has("autocmd") && exists("+omnifunc")
+"  autocmd Filetype *
+"              \	if &omnifunc == "" |
+            "\		setlocal omnifunc=syntaxcomplete#Complete |
+              "\	endif
+"endif
 
 " Close automatically the preview window after a moni completion
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
@@ -236,19 +250,19 @@ map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ../.<CR>
 "auto add right parenthesis
 ":inoremap ( ()<ESC>i
 ":inoremap ) <c-r>=ClosePair(')')<CR>
-:inoremap { {}<ESC>i
-:inoremap } <c-r>=ClosePair('}')<CR>
+":inoremap { {}<ESC>i
+":inoremap } <c-r>=ClosePair('}')<CR>
 ":inoremap [ []<ESC>i
 ":inoremap ] <c-r>=ClosePair(']')<CR>
 ":inoremap < <><ESC>i
 ":inoremap > <c-r>=ClosePair('>')<CR>
-function ClosePair(char)
-if getline('.')[col('.') - 1] == a:char
-return "\<Right>"
-else
-return a:char
-endif
-endf
+"function ClosePair(char)
+"if getline('.')[col('.') - 1] == a:char
+"return "\<Right>"
+"else
+"return a:char
+"endif
+"endf
 
 " make CSS omnicompletion work for SASS and SCSS
 " autocmd BufNewFile,BufRead *.scss             set ft=scss.css
@@ -317,3 +331,89 @@ nnoremap <silent> <F8> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 "let g:tagbar_ctags_bin = '/usr/bin/ctags' "Proper ctags locations
 "let g:tagbar_width = 26                   "Default is 40, seems too wide
+
+
+" --- NERDTree
+let NERDTreeShowHidden=1
+let NERDQuitOnOpen=0
+"let NERDTreeShowLineNumbers=1
+let NERDTreeChDirMode=0
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.git', '\.hg', 'CVS']
+"let NERDTreeBookmarksFile=s:get_cache_dir('NERDTreeBookmarks')
+nnoremap <F2> :NERDTreeToggle<CR>
+nnoremap <F3> :NERDTreeFind<CR>
+
+
+" --- unite
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#set_profile('files', 'smartcase', 1)
+call unite#custom#source('line,outline','matchers','matcher_fuzzy')
+call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+  \ 'ignore_pattern', join([
+  \ '\.git/',
+  \ '\cvs/',
+  \ '\.sass-cache/',
+  \ '\vendor/',
+  \ '\node_modules/',
+  \ ], '\|'))
+
+
+"let g:unite_enable_start_insert=1
+let g:unite_source_history_yank_enable=1
+let g:unite_source_rec_max_cache_files=5000
+let g:unite_force_overwrite_statusline=0
+let g:unite_prompt='>> '
+
+function! s:unite_settings()
+  nmap <buffer> q <plug>(unite_exit)
+  nmap <buffer> <esc> <plug>(unite_exit)
+  "imap <buffer> <esc> <plug>(unite_exit)
+  imap <buffer> <C-j> <Plug>(unite_select_next_line)
+  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+  imap <buffer> <C-a> <Plug>(unite_choose_action)
+  imap <silent><buffer><expr> <C-s> unite#do_action('split')
+  imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+  nmap <silent><buffer><expr> <C-s> unite#do_action('split')
+  nmap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+endfunction
+autocmd FileType unite call s:unite_settings()
+
+nmap <space> [unite]
+nnoremap [unite] <nop>
+"nnoremap <silent> [unite]<space> :<C-u>Unite -toggle -auto-resize -buffer-name=mixed file_rec/async:! buffer file bookmark<cr><c-u>
+"nnoremap <silent> [unite]f :<C-u>Unite -toggle -auto-resize -buffer-name=files file_rec/async:!<cr><c-u>
+"nnoremap <silent> [unite]e :<C-u>Unite -buffer-name=recent file<cr>
+"nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<cr>
+"nnoremap <silent> [unite]l :<C-u>Unite -auto-resize -buffer-name=line line<cr>
+"nnoremap <silent> [unite]b :<C-u>Unite -auto-resize -buffer-name=buffers buffer<cr>
+"nnoremap <silent> [unite]/ :<C-u>Unite -no-quit -buffer-name=search grep:.<cr>
+"nnoremap <silent> [unite]m :<C-u>Unite -auto-resize -buffer-name=mappings mapping<cr>
+"nnoremap <silent> [unite]s :<C-u>Unite -quick-match buffer<cr>
+
+" General purpose
+nnoremap [unite]<space> :Unite -no-split -start-insert source<cr>
+
+" Files
+nnoremap [unite]f :Unite -no-split -start-insert file_rec/async<cr>
+nnoremap [unite]F :Unite -no-split -start-insert file_rec/async:../
+
+" Grepping
+nnoremap [unite]g :Unite -no-split grep:.<cr>
+nnoremap [unite]G :Unite -no-split grep:../<cr>
+"nnoremap [unite]d :Unite -no-split grep:.:-s:\(TODO\|FIXME\)<cr>
+
+" Content
+nnoremap [unite]o :Unite -no-split -start-insert -auto-preview outline<cr>
+nnoremap [unite]l :Unite -no-split -start-insert line<cr>
+nnoremap [unite]t :Unite -no-split -auto-preview -start-insert tag<cr>
+
+" Quickly switch between recent things
+nnoremap [unite]R :Unite -no-split buffer tab file_mru directory_mru<cr>
+nnoremap [unite]b :Unite -no-split buffer<cr>
+nnoremap [unite]m :Unite -no-split file_mru<cr>
+
+" Yank history
+nnoremap [unite]y :Unite -no-split history/yank<cr>
