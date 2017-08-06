@@ -70,3 +70,12 @@
 [submodule "bundle/unite-tag"]
 	path = bundle/unite-tag
 	url = https://github.com/tsukkee/unite-tag
+[submodule "bundle/vim_colors_solarized"]
+	path = bundle/vim_colors_solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule "bundle/vim_colors_gruvbox"]
+	path = bundle/vim_colors_gruvbox
+	url = https://github.com/morhetz/gruvbox
+[submodule "neocomplcache"]
+	path = neocomplcache
+	url = https://github.com/Shougo/neocomplcache.vim

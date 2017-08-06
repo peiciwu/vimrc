@@ -19,6 +19,8 @@ set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 " set nu                " show line number
 set tw=80               " set line width
+set foldmethod=syntax
+set foldlevelstart=20
 
 " This makes vim act like all other editors, buffers can
 " exist in the background without being in a window.
@@ -34,13 +36,19 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 
 syntax on            " syntax highlight
 set hlsearch         " search highlighting
-set background=dark
 set t_Co=256         " 256 color mode
-colors herald_pc
+
+let g:solarized_termcolors=256
 
 if has("gui_running")   " GUI color and font settings
 	"set guifont=Monaco:h14 " Mac own font
+        set background=light   " set background
 	set cursorline  " highlight current line
+	colors solarized  " other colorschemes: gruvbox
+else
+        set background=dark   " set background
+        colors herald_pc " dark background: zenburn
+        " colors morning " light background: peaksea
 endif
 
 set clipboard=unnamed	" yank to the system register (*) by default
@@ -209,7 +217,7 @@ nnoremap <silent> ,S <C-W><C-]>
 " use ,V to jump to tag in a vertical split
 nnoremap <silent> ,V  :let word=expand("<cword>")<CR>:vsp<CR>:wincmd w<cr>:exec("tag ". word)<cr>
 " use ,T to jump to tag in a new tab
-nnoremap <silent> ,T :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"nnoremap <silent> ,T :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 
 
 " ,g generates the header guard
@@ -244,25 +252,29 @@ autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 " build Ctags database
-map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .
 map <F11> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ../.<CR>
 
 "auto add right parenthesis
 ":inoremap ( ()<ESC>i
 ":inoremap ) <c-r>=ClosePair(')')<CR>
-":inoremap { {}<ESC>i
-":inoremap } <c-r>=ClosePair('}')<CR>
+:inoremap { {}<ESC>i
+:inoremap } <c-r>=ClosePair('}')<CR>
 ":inoremap [ []<ESC>i
 ":inoremap ] <c-r>=ClosePair(']')<CR>
 ":inoremap < <><ESC>i
 ":inoremap > <c-r>=ClosePair('>')<CR>
-"function ClosePair(char)
-"if getline('.')[col('.') - 1] == a:char
-"return "\<Right>"
-"else
-"return a:char
-"endif
-"endf
+function ClosePair(char)
+if getline('.')[col('.') - 1] == a:char
+return "\<Right>"
+else
+return a:char
+endif
+endf
+
+" build CScope database
+" find . -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.hpp" -o -name ".tcc" -o -name "*.tcl" -o -name "*.cmd" -o -name "*.ecmd" -o -name "*.pl" -o -name "*.py" -name "makefile" > cscope.files
+" cscope -q -R -b -i cscope.files
 
 " make CSS omnicompletion work for SASS and SCSS
 " autocmd BufNewFile,BufRead *.scss             set ft=scss.css
@@ -329,7 +341,7 @@ hi link EasyMotionShade  Comment
 nnoremap <silent> <F8> :TagbarToggle<CR> 
 " set focus to TagBar when opening it
 let g:tagbar_autofocus = 1
-"let g:tagbar_ctags_bin = '/usr/bin/ctags' "Proper ctags locations
+let g:tagbar_ctags_bin = '/sierra/project/tools/linux_x86_64_2.12/bin/ctags' "Proper ctags locations
 "let g:tagbar_width = 26                   "Default is 40, seems too wide
 
 
@@ -340,15 +352,22 @@ let NERDQuitOnOpen=0
 let NERDTreeChDirMode=0
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.git', '\.hg', 'CVS']
-"let NERDTreeBookmarksFile=s:get_cache_dir('NERDTreeBookmarks')
-nnoremap <F2> :NERDTreeToggle<CR>
-nnoremap <F3> :NERDTreeFind<CR>
+"let NERDTreeBookmarksFile=get_cache_dir('NERDTreeBookmarks')
+let s:NERDTree_view_bookmark=$SDA_VIEW_DIR.'/.NERDTreeBookmarks'
+if filewritable(s:NERDTree_view_bookmark)
+  let NERDTreeBookmarksFile=s:NERDTree_view_bookmark
+endif
+
+
+nnoremap <F5> :NERDTreeToggle<CR>
+nnoremap <F6> :NERDTreeFind<CR>
 
 
 " --- unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-call unite#set_profile('files', 'smartcase', 1)
+"call unite#set_profile('files', 'smartcase', 1)
+"call unite#custom#profile('files', 'smartcase', 1)
 call unite#custom#source('line,outline','matchers','matcher_fuzzy')
 call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
   \ 'ignore_pattern', join([
@@ -365,6 +384,14 @@ let g:unite_source_history_yank_enable=1
 let g:unite_source_rec_max_cache_files=5000
 let g:unite_force_overwrite_statusline=0
 let g:unite_prompt='>> '
+let g:unite_source_grep_max_candidates=1000
+"let g:unite_kind_file_vertical_preview=1
+"let g:unite_enable_split_vertically=1
+let g:unite_source_grep_default_opts = '-nH --exclude=tags --exclude=TAGS --exclude-dir=CVS --exclude=cscope.files'
+let g:unite_update_time=100
+let g:unite_winheight=30
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
 
 function! s:unite_settings()
   nmap <buffer> q <plug>(unite_exit)
@@ -397,18 +424,18 @@ nnoremap [unite] <nop>
 nnoremap [unite]<space> :Unite -no-split -start-insert source<cr>
 
 " Files
-nnoremap [unite]f :Unite -no-split -start-insert file_rec/async<cr>
+nnoremap [unite]f :Unite -no-split -start-insert file_rec/async:
 nnoremap [unite]F :Unite -no-split -start-insert file_rec/async:../
 
 " Grepping
-nnoremap [unite]g :Unite -no-split grep:.<cr>
-nnoremap [unite]G :Unite -no-split grep:../<cr>
+nnoremap [unite]g :Unite -no-split -auto-preview grep:
+nnoremap [unite]G :Unite -no-quit -auto-preview grep:
 "nnoremap [unite]d :Unite -no-split grep:.:-s:\(TODO\|FIXME\)<cr>
 
 " Content
 nnoremap [unite]o :Unite -no-split -start-insert -auto-preview outline<cr>
-nnoremap [unite]l :Unite -no-split -start-insert line<cr>
-nnoremap [unite]t :Unite -no-split -auto-preview -start-insert tag<cr>
+nnoremap [unite]l :Unite -no-split -start-insert -auto-preview line<cr>
+nnoremap [unite]t :Unite -no-split -start-insert -auto-preview tag<cr>
 
 " Quickly switch between recent things
 nnoremap [unite]R :Unite -no-split buffer tab file_mru directory_mru<cr>
@@ -417,3 +444,9 @@ nnoremap [unite]m :Unite -no-split file_mru<cr>
 
 " Yank history
 nnoremap [unite]y :Unite -no-split history/yank<cr>
+
+" CScope
+nnoremap [unite]s :Unite -no-split -auto-preview cscope/
+
+" Repeate the last Unite action
+nnoremap [unite]r :UniteResume<cr>
