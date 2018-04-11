@@ -4,9 +4,6 @@
 [submodule "bundle/smart-parentheses"]
 	path = bundle/smart-parentheses
 	url = git://github.com/vim-scripts/Smart-Parentheses.git
-[submodule "bundle/command-t"]
-	path = bundle/command-t
-	url = git://github.com/wincent/Command-T.git
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = git://github.com/tpope/vim-surround.git
@@ -16,15 +13,9 @@
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
-[submodule "bundle/yankring"]
-	path = bundle/yankring
-	url = git://github.com/vim-scripts/YankRing.vim.git
 [submodule "bundle/VisIncr"]
 	path = bundle/VisIncr
 	url = git://github.com/vim-scripts/VisIncr.git
-[submodule "bundle/xmledit"]
-	path = bundle/xmledit
-	url = git://github.com/sukima/xmledit.git
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = git://github.com/vim-scripts/matchit.zip.git
@@ -79,3 +70,9 @@
 [submodule "neocomplcache"]
 	path = neocomplcache
 	url = https://github.com/Shougo/neocomplcache.vim
+[submodule "bundle/fugitive"]
+	path = bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "bundle/denite"]
+	path = bundle/denite
+	url = https://github.com/Shougo/denite.nvim.git

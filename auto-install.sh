@@ -17,10 +17,9 @@ die() {
 git clone git://github.com/peiciwu/vimrc.git "$VIMHOME"
 cd "$VIMHOME"
 git submodule update --init
+cd "$VIMHOME/bundle/vimproc"
+make
 
 ./install-vimrc.sh
-
-cd bundle/command-t/ruby/command-t
-(ruby extconf.rb && make) || warn "Can't compile Command-T."
 
 echo "vimrc is installed."

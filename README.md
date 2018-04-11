@@ -45,6 +45,8 @@ MANUALLY INSTALL
         git clone git://github.com/peiciwu/vimrc.git ~/.vim
         cd ~/.vim
         git submodule update --init
+        cd ~/.vim/bundle/vimproc
+        make
 
 2. Install ~/.vimrc and ~/.gvimrc
 
