@@ -38,7 +38,7 @@ syntax on            " syntax highlight
 set hlsearch         " search highlighting
 set t_Co=256         " 256 color mode
 
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
 
 if has("gui_running")   " GUI color and font settings
 	"set guifont=Monaco:h14 " Mac own font
@@ -47,6 +47,7 @@ if has("gui_running")   " GUI color and font settings
 	colors solarized  " other colorschemes: gruvbox
 else
         set background=dark   " set background
+	" colors solarized
         colors herald_pc " dark background: zenburn
         " colors morning " light background: peaksea
 endif
@@ -273,7 +274,7 @@ endif
 endf
 
 " build CScope database
-" find . -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.hpp" -o -name ".tcc" -o -name "*.tcl" -o -name "*.cmd" -o -name "*.ecmd" -o -name "*.pl" -o -name "*.py" -name "makefile" > cscope.files
+" find . -name "*.c" -name "*.cc" -o -name "*.h" -o -name "*.cpp" -o -name "*.hpp" -o -name ".tcc" -o -name "*.tcl" -o -name "*.cmd" -o -name "*.ecmd" -o -name "*.pl" -o -name "*.py" -name "makefile" > cscope.files
 " cscope -q -R -b -i cscope.files
 
 " make CSS omnicompletion work for SASS and SCSS
@@ -341,7 +342,7 @@ hi link EasyMotionShade  Comment
 nnoremap <silent> <F8> :TagbarToggle<CR> 
 " set focus to TagBar when opening it
 let g:tagbar_autofocus = 1
-let g:tagbar_ctags_bin = '/sierra/project/tools/linux_x86_64_2.12/bin/ctags' "Proper ctags locations
+" let g:tagbar_ctags_bin = '/sierra/project/tools/linux_x86_64_2.12/bin/ctags' "Proper ctags locations
 "let g:tagbar_width = 26                   "Default is 40, seems too wide
 
 
@@ -366,8 +367,8 @@ nnoremap <F6> :NERDTreeFind<CR>
 " --- unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-"call unite#set_profile('files', 'smartcase', 1)
-"call unite#custom#profile('files', 'smartcase', 1)
+call unite#set_profile('files', 'smartcase', 1)
+call unite#custom#profile('files', 'smartcase', 1)
 call unite#custom#source('line,outline','matchers','matcher_fuzzy')
 call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
   \ 'ignore_pattern', join([
@@ -384,11 +385,11 @@ let g:unite_source_history_yank_enable=1
 let g:unite_source_rec_max_cache_files=5000
 let g:unite_force_overwrite_statusline=0
 let g:unite_prompt='>> '
-let g:unite_source_grep_max_candidates=1000
+let g:unite_source_grep_max_candidates=3000
 "let g:unite_kind_file_vertical_preview=1
 "let g:unite_enable_split_vertically=1
-let g:unite_source_grep_default_opts = '-nH --exclude=tags --exclude=TAGS --exclude-dir=CVS --exclude=cscope.files'
-let g:unite_update_time=100
+let g:unite_source_grep_default_opts = '-nH --exclude=tags --exclude=TAGS --exclude-dir=CVS --exclude=cscope.files --exclude=cscope.out'
+"let g:unite_update_time=100
 let g:unite_winheight=30
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
@@ -433,9 +434,9 @@ nnoremap [unite]G :Unite -no-quit -auto-preview grep:
 "nnoremap [unite]d :Unite -no-split grep:.:-s:\(TODO\|FIXME\)<cr>
 
 " Content
-nnoremap [unite]o :Unite -no-split -start-insert -auto-preview outline<cr>
-nnoremap [unite]l :Unite -no-split -start-insert -auto-preview line<cr>
-nnoremap [unite]t :Unite -no-split -start-insert -auto-preview tag<cr>
+nnoremap [unite]o :Unite outline <cr>
+nnoremap [unite]l :Unite line<cr>
+nnoremap [unite]t :Unite tag<cr>
 
 " Quickly switch between recent things
 nnoremap [unite]R :Unite -no-split buffer tab file_mru directory_mru<cr>
@@ -443,7 +444,7 @@ nnoremap [unite]b :Unite -no-split buffer<cr>
 nnoremap [unite]m :Unite -no-split file_mru<cr>
 
 " Yank history
-nnoremap [unite]y :Unite -no-split history/yank<cr>
+nnoremap [unite]y :Unite -buffer-name=yanks history/yank<cr>
 
 " CScope
 nnoremap [unite]s :Unite -no-split -auto-preview cscope/
